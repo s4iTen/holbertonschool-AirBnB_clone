@@ -54,3 +54,5 @@ class TestBaseModel(unittest.BaseModel):
         my_model.save()
         self.NotEqual(my_model.updated_at, original_updated_at)
         self.IsInstance(my_model.updated_at, datetime.datetime)
+if __name__ == "__main__":
+    unittest.main()
