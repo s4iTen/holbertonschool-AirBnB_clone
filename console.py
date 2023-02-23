@@ -138,8 +138,9 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return False
 
-        c_id = obj_dict.items()
-        print(c_id)
+        if "{}.{}".format(args[0], args[1]) not in obj_dict.keys():
+            print("** no instance found **")
+            return False
 
         obj_id = args[1]
         key = cls_name + "." + obj_id
