@@ -65,6 +65,9 @@ class HBNBCommand(cmd.Cmd):
         if not arg[1]:
             print("** class doesn't exist **")
             return
+        if cls_name not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+            return
         if len(args) < 2:
             print("** instance id missing **")
             return
@@ -154,11 +157,9 @@ class HBNBCommand(cmd.Cmd):
         # Check for attribute value
         if len(args) < 4:
             print("** value missing **")
-        attr_value = str(args[3][1:-1])
-        obj = obj_dict[key]
-        setattr(obj, attr_name, attr_value)
-        models.storage.save()
+        else:
+            attr_value = str(args[3][1:-1])
+            obj = obj_dict[key]
+            setattr(obj, attr_name, attr_value)
+            models.storage.save()
 
-
-if __name__ == '__main__':
-    HBNBCommand().cmdloop()
