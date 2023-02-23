@@ -3,6 +3,7 @@
 
 import os
 import unittest
+import json
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
@@ -43,13 +44,25 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn(model.id, data)
 
     def test_reload(self):
-        """Test reload method"""
-        model = BaseModel()
-        key = "{}.{}".format(type(model).__name__, model.id)
-        self.storage.new(model)
-        self.storage.save()
-        self.storage.reload()
-        self.assertIn(key, self.storage.all())
+        # Create a test JSON file with a single BaseModel instance
+        test_dict = {"BaseModel.1234": {"id": "1234", "created_at": "2022-02-21T14:10:00.000000", "updated_at": "2022-02-21T14:10:00.000000", "__class__": "BaseModel"}}
+        with open(FileStorage._FileStorage__file_path, "w") as f:
+            json.dump(test_dict, f)
+
+        # Create a FileStorage instance and call reload
+        fs = FileStorage()
+        fs.reload()
+
+        # Check that the reloaded object matches the original object
+        loaded_obj = fs.all()["BaseModel.1234"]
+        self.assertIsInstance(loaded_obj, BaseModel)
+        self.assertEqual(loaded_obj.id, "1234")
+        self.assertEqual(str(loaded_obj.created_at), "2022-02-21 14:10:00")
+        self.assertEqual(str(loaded_obj.updated_at), "2022-02-21 14:10:00")
+
+        # Cleanup by deleting the test JSON file
+        import os
+        os.remove(FileStorage._FileStorage__file_path)
 
 
 if __name__ == '__main__':
