@@ -16,13 +16,7 @@ def parse(arg):
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb)'
     __classes = {
-        "BaseModel",
-        "User",
-        "State",
-        "City",
-        "Place",
-        "Amenity",
-        "Review"
+        "BaseModel"
     }
 
     def do_quit(self, arg):
@@ -144,6 +138,9 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return False
 
+        c_id = obj_dict.items()
+        print(c_id)
+
         obj_id = args[1]
         key = cls_name + "." + obj_id
 
@@ -163,3 +160,6 @@ class HBNBCommand(cmd.Cmd):
             setattr(obj, attr_name, attr_value)
             models.storage.save()
 
+
+if __name__ == "__main__":
+    HBNBCommand().cmdloop()
