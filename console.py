@@ -4,6 +4,11 @@ import cmd
 import models
 from models.base_model import BaseModel
 from models.user import User
+from models.amenity import Amenity
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.review import Review
 import re
 
 
@@ -17,12 +22,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb)'
     __classes = {
         "BaseModel",
-        "User",
-        "City",
-        "Place",
-        "State",
-        "Amenity",
-        "Review"
+        "User"
     }
 
     def do_quit(self, arg):
@@ -168,5 +168,3 @@ class HBNBCommand(cmd.Cmd):
             models.storage.save()
 
 
-if __name__ == "__main__":
-    HBNBCommand().cmdloop()
