@@ -1,0 +1,33 @@
+.places {
+    top: auto;
+    font-size: 30px;
+}
+.places article {
+    width: 390px;
+    padding: 20px;
+    margin: 20px;
+    border: #FF5A5F 1px;
+    border-radius: 4px;
+    align-items: center;
+    font-size: 30px;
+}
+.price_by_night {
+    color: #FF5A5F;
+    border: #FF5A5F;
+    border-radius: 4px;
+    min-width: 60px;
+    height: 60px;
+    font-size: 30px;
+    top: auto;
+    right: auto;
+}
+.information {
+    height: 80px;
+    border-top: #DDDDDD 1px;
+    border-bottom: #DDDDDD 1px;
+}
+.max_guest,
+.number_rooms,
+.number_bathrooms {
+    width: 100px;
+}
